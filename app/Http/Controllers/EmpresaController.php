@@ -27,14 +27,11 @@ class EmpresaController extends Controller
     return view('usuario.vistaEmpresa', compact('empresa'));
     }
 
-    //
     // public function agregarEmpresa(Request $request){
     //     $nombre =$request ->input('nombreEmpresa');
     //     echo $nombre;
     //     return view('visaadminempresa');
     // }
-
-
 
     public function ver_datos_empresa($IdEmp)
     {
