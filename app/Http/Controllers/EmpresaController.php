@@ -55,4 +55,30 @@ class EmpresaController extends Controller
         ->delete();
         return redirect()->to('/vistaEmpresa/Inicio')->with('mensaje','El registro se eliminó correctamente');
     }
+
+    public function registroEmpresa()
+    {
+        $insercionEmpresas = DB::table('empresa')->get();
+        return view('admin.empresa_registro', ['empresa' => $insercionEmpresas]);
+    }
+
+    public function agregar(Request $request) {
+
+        $this->validate(request(), [
+            'Nombre' => 'required',
+            'Direccion'  => 'required',
+            'Correo' => 'required',
+            'Telefono' => 'required',
+            'RFC' => 'required',
+            'Giro' => 'required',
+            'URLemp' => 'required',
+            'fk_TipoEmp' => 'required',
+            'fk_TamañoEmp' => 'required'
+        ]);
+        dd($request);
+        User::create(request(['Nombre', 'Direccion', 'Correo', 'Telefono','RFC','Giro','URLemp','fk_TipoEmp','fk_TamañoEmp']));
+
+        return redirect()->to('/datatable_Edatos')->with('success','Empresa agregado');
+    }
+
 }

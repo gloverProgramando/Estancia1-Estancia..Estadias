@@ -445,3 +445,12 @@ Route::match(['post','get'],'/estancia1/{Proces}', [Estancia1Controller::class, 
     //usuario ver datos empresa
     Route::match(['get'],'/vistaEmpresaAlumno/Inicio',[EmpresaController::class,'vertest2'])
     ->name('vistaEmpresa.index');
+
+    //ver agregar empresa
+    Route::get('/registro_de_empresa', [EmpresaController::class, 'registroEmpresa'])
+    ->name('empresa_registro.index')
+    ->middleware('auth.admin');
+
+    //funcion registrar empresa
+    Route::post('/agregar_empresa', [EmpresaController::class, 'agregar'])
+    ->name('registrar_empresa.index');
