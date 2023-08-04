@@ -19,6 +19,28 @@ class Empresa extends Model
      * Tambien devuelve la llamada si Ocurrió algun error
     */
 
+    protected $fillable = [
+        'Nombre',
+        'Direccion',
+        'Correo',
+        'Telefono',
+        'RFC',
+        'Giro',
+        'URLemp',
+        'fk_TipoEmp',
+        'fk_TamañoEmp'
+    ];
+
+    public function tipoEmpresa()
+    {
+        return $this->belongsTo(TipoEmp::class, 'fk_TipoEmp');
+    }
+
+    public function tamañoEmpresa()
+    {
+        return $this->belongsTo(TipoEmp::class, 'fk_TamañoEmp');
+    }
+
     public static function requestInsertEmpresa($data) {
 
         try{

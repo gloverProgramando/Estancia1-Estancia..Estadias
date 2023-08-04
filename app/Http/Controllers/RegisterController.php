@@ -23,7 +23,7 @@ class RegisterController extends Controller
             'Nombre' => 'required',
             'Matricula' => 'required'
         ]);
-        
+
         $user = User::create(request(['name', 'IdTipoUsu', 'email', 'password','Nombre','Matricula']));
 
         if (auth()->login($user) == 1 || auth()->login($user) == '1') {

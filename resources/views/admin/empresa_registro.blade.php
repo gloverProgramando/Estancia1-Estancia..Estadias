@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     @include('plantilla/admin/head')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,12 @@
 </head>
 
 <body class="bg-cover bg-center" style="background-image: url('https://ceduladeregistro.upqroo.edu.mx/css/LogoCafe.jpg')">
+
     <!-- Content page-->
     <section class="full-box dashboard-contentPage">
         <!-- NavBar -->
         @include('plantilla/admin/navBar')
-        <form method="POST" action="{{ route('registrar_usuario.index') }}">
+        <form method="POST" action="{{ route('registrar_empresa.index') }}">
             @csrf
             <div class="flex justify-center items-center h-screen bg-cover bg-center">
                 <div class="bg-white p-4 rounded shadow-lg">
@@ -30,6 +32,7 @@
                                     <p class="border border-danger rounded-md bg-red-200 w-full text-red-600 p-2 my-2">
                                         {{ $message }}</p>
                                 @enderror
+
                             </div>
                             <div>
                                 <label for="Giro" class="block font-medium mb-2 form-label">Tipo de Giro</label>
@@ -51,32 +54,24 @@
                             </div>
                             <div>
                                 <label for="fk_TamañoEmp" class="block font-medium mb-2 form-label">Tamaño:</label>
-                                <select id="fk_TamañoEmp" name="" id="fk_TamañoEmp"
+                                <select id="fk_TamañoEmp" name="fk_TamañoEmp"
                                     class="form-control form-control-lg w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    {{-- @foreach ($empresa as $tamaño)
-                                        <option value="{{ $tamaño->fk_TamañoEmp }}">{{ $tamaño->fk_TamañoEmp }}</option>
-                                    @endforeach --}}
-                                    <option value="1">Pequeña</option>
-                                    <option value="2">Mediana</option>
-                                    <option value="3">Grande</option>
+                                    @foreach ($empresa as $tamaño)
+                                        <option value="{{ $tamaño->Tipo_Tamaño }}">{{ $tamaño->Tipo_Tamaño }}</option>
+                                    @endforeach
                                 </select>
 
-                                @error('fk_TamañoEmp')
-                                    <p class="border border-danger rounded-md bg-red-200 w-full text-red-600 p-2 my-2">
-                                        {{ $message }}</p>
-                                @enderror
+
                             </div>
                             <div>
                                 <label for="fk_TipoEmp" class="block font-medium mb-2 form-label">Tipo de
                                     empresa:</label>
                                 <select id="fk_TipoEmp" name="fk_TipoEmp"
                                     class="form-control form-control-lg w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Privada</option>
-                                    <option value="2">Pública</option>
-                                    <option value="3">Social</option>
-                                    {{-- @foreach ($empresa as $tipoempr)
-                                        <option value="{{ $tipoempr->fk_TipoEmp }}">{{ $tipoempr->fk_TipoEmp }}</option>
-                                    @endforeach --}}
+                                    @foreach ($empresa as $tipoempr)
+                                        <option value="{{ $tipoempr->Tipo_Empresa }}">{{ $tipoempr->Tipo_Empresa }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('fk_TipoEmp')
                                     <p class="border border-danger rounded-md bg-red-200 w-full text-red-600 p-2 my-2">
@@ -116,7 +111,6 @@
 
                         <div class="w-full">
                             <label for="URLemp" class="block font-medium mb-2 form-label">URL</label>
-                            {{-- <input type="text" id="direccion" name="direccion" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"> --}}
                             <input type="text" id="URLemp" class="form-control form-control-lg" name="URLemp" />
                             @error('URLemp')
                                 <p class="border border-danger rounded-md bg-red-200 w-full text-red-600 p-2 my-2">

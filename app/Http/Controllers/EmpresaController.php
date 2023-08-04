@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\documentos;
-use App\Models\Empresa;
+
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Empresa;
+use App\Models\UserEmpresa;
+use App\Models\TipoEmp;
+use App\Models\Tamañoemp;
 
 class EmpresaController extends Controller
 {
@@ -26,12 +30,6 @@ class EmpresaController extends Controller
 
     return view('usuario.vistaEmpresa', compact('empresa'));
     }
-
-    // public function agregarEmpresa(Request $request){
-    //     $nombre =$request ->input('nombreEmpresa');
-    //     echo $nombre;
-    //     return view('visaadminempresa');
-    // }
 
     public function ver_datos_empresa($IdEmp)
     {
@@ -58,15 +56,31 @@ class EmpresaController extends Controller
 
     public function registroEmpresa()
     {
-        $insercionEmpresas = DB::table('empresa')->get();
+        $insercionEmpresas = DB::table('empresa AS emp')
+        ->select(
+                 'emp.Nombre',
+                 'emp.Direccion',
+                 'emp.Correo',
+                 'emp.Telefono',
+                 'emp.RFC', 'emp.Giro',
+                 'emp.URLemp',
+                 'tipE.Tipo_Empresa',
+                 'taE.Tipo_Tamaño')
+        ->join('tipoemp AS tipE', 'emp.fk_TipoEmp', '=', 'tipE.id_Tipo_Emp')
+        ->join('tamañoemp AS taE', 'emp.fk_TamañoEmp', '=', 'taE.id_Tamaño_Emp')
+        // ->join('user_empresa as uE', 'emp.IdEmp', '=', 'uE.id_empresa ')
+        // ->join('users as iA', 'user_empresa.id_user', '=', ' iA.id')
+        ->get();
+
         return view('admin.empresa_registro', ['empresa' => $insercionEmpresas]);
     }
+
 
     public function agregar(Request $request) {
 
         $this->validate(request(), [
             'Nombre' => 'required',
-            'Direccion'  => 'required',
+            'Dirreccion' => 'required',
             'Correo' => 'required',
             'Telefono' => 'required',
             'RFC' => 'required',
@@ -75,10 +89,16 @@ class EmpresaController extends Controller
             'fk_TipoEmp' => 'required',
             'fk_TamañoEmp' => 'required'
         ]);
-        dd($request);
-        User::create(request(['Nombre', 'Direccion', 'Correo', 'Telefono','RFC','Giro','URLemp','fk_TipoEmp','fk_TamañoEmp']));
+        $Result = User::create(request(['Nombre','Dirreccion','Correo','Telefono','RFC', 'Giro','URLemp','fk_TipoEmp','fk_TamañoEmp']));
+        // dd($Result);
+        return view('admin.empresa_registro');
 
-        return redirect()->to('/datatable_Edatos')->with('success','Empresa agregado');
+    }
+
+    public function vertipo() {
+        $empresa = User::join('tipoemp', 'empresa.id_Tipo_Emp ', '=', 'tipoemp.id_Tipo_Emp ')->get();
+        dd($empresa);
+        return view('admin.empresa_registro', compact('tipoemp'));
     }
 
 }
