@@ -455,9 +455,3 @@ Route::match(['post','get'],'/estancia1/{Proces}', [Estancia1Controller::class, 
     Route::post('/agregar_empresa', [EmpresaController::class, 'agregar'])
     ->name('registrar_empresa.index');
 
-
-// use App\Http\Controllers\EmpresaController;
-
-// Route::get('/registro', [EmpresaController::class, 'showForm'])->name('registro_form');
-// Route::post('/registro', [EmpresaController::class, 'saveData'])->name('guardar_registro');
-

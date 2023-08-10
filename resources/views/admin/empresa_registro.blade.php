@@ -54,25 +54,41 @@
                             </div>
                             <div>
                                 <label for="fk_TamañoEmp" class="block font-medium mb-2 form-label">Tamaño:</label>
+                                {{-- <input type="text" id="fk_TamañoEmp" class="form-control form-control-lg"
+                                name="fk_TamañoEmp" /> --}}
+
                                 <select id="fk_TamañoEmp" name="fk_TamañoEmp"
                                     class="form-control form-control-lg w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    @foreach ($empresa as $tamaño)
-                                        <option value="{{ $tamaño->Tipo_Tamaño }}">{{ $tamaño->Tipo_Tamaño }}</option>
-                                    @endforeach
+                                    <option value="1">Pequeña</option>
+                                    <option value="2">Mediana</option>
+                                    <option value="3">Grande</option>
                                 </select>
 
-
+                                {{-- <select id="fk_TamañoEmp" name="fk_TamañoEmp"
+                                    class="form-control form-control-lg w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    @foreach ($empresa as $tamaños)
+                                        <option value="{{ $tamaños->id_Tamaño_Emp}}">{{ $tamaños->Tipo_Tamaño }}</option>
+                                    @endforeach
+                                </select> --}}
                             </div>
                             <div>
                                 <label for="fk_TipoEmp" class="block font-medium mb-2 form-label">Tipo de
                                     empresa:</label>
+                                {{-- <input type="text" id="fk_TipoEmp" class="form-control form-control-lg"
+                                name="fk_TipoEmp" /> --}}
                                 <select id="fk_TipoEmp" name="fk_TipoEmp"
                                     class="form-control form-control-lg w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    @foreach ($empresa as $tipoempr)
-                                        <option value="{{ $tipoempr->Tipo_Empresa }}">{{ $tipoempr->Tipo_Empresa }}
-                                        </option>
-                                    @endforeach
+                                    <option value="1">Privada</option>
+                                    <option value="2">Publica</option>
+                                    <option value="3">Social</option>
                                 </select>
+                                {{-- <select id="fk_TipoEmp" name="fk_TipoEmp"
+                                    class="form-control form-control-lg w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    @foreach ($empresa as $tipoempr)
+                                        <option value="{{ $tipoempr->id_Tipo_Emp}}">{{ $tipoempr->id_Tipo_Emp }}</option>
+                                    @endforeach
+                                </select> --}}
+
                                 @error('fk_TipoEmp')
                                     <p class="border border-danger rounded-md bg-red-200 w-full text-red-600 p-2 my-2">
                                         {{ $message }}</p>

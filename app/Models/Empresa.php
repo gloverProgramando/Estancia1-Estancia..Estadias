@@ -20,6 +20,7 @@ class Empresa extends Model
     */
 
     protected $fillable = [
+        // 'IdEmp',
         'Nombre',
         'Direccion',
         'Correo',
@@ -30,6 +31,11 @@ class Empresa extends Model
         'fk_TipoEmp',
         'fk_TamañoEmp'
     ];
+
+    public function tipoEmp()
+    {
+        return $this->belongsTo(TipoEmp::class, 'fk_TipoEmp', 'id_Tipo_Emp');
+    }
 
     public function tipoEmpresa()
     {
